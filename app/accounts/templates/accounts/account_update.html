@@ -1,0 +1,19 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+<h1>Update Your Profile </h1>
+<br>
+<br>
+
+<div class="profile_update">
+<form action="." method="POST" class="padding" enctype="multipart/form-data">
+{% csrf_token %} {{ noodle_form.as_p }}
+<div class="divider"></div>
+{{ formset.management_form }}
+{{ formset.as_p }}
+<br>
+<button type="submit" class="btn-floating btn-large waves-light waves-effect">Done</button>
+history
+</form>
+</div>
+{% endblock %}

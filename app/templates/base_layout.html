@@ -1,0 +1,74 @@
+{% load static from staticfiles %}
+{% load i18n static %}{% load postman_tags %}
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Article</title>
+        <link rel="stylesheet" href="{% static 'styles.css'%}">
+    </head>
+    <div id="sidebar">
+        <div class="toggle-btn" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <br>
+
+            <div class="sidebar_photo">
+            <li><img src="{{ user.user.image.url }}"><a href="{% url 'accounts:my-profile' %}">{{user.first_name}}</a></li>
+            </div>
+            <br>
+            <br>
+            <li><a href="{% url 'articles:filter' %}">Home</a></li>
+            {% postman_unread as unread_count %}
+            <li><a href="{% url 'postman:inbox' %}">{% trans "Messages" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a></li>
+            <li><a href="{% url 'articles:create' %}">New Post +</a></li>
+            <li><a href="{% url 'articles:myposts' %}">My Posts</a></li>
+            <br>
+            <br>
+            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+            <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+        </ul>
+    </div>
+
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+        <header class="Wrapper">
+            <h1><a href="{% url 'home' %}"><img src="{%static 'test_logo.png'%}" alt="app"/></a></h1>
+            <nav>
+                <ul>
+                    {% if user.is_authenticated%}
+                    <li>
+                        <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" >Logout</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                    <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <div class="Wrapper">
+        <script src="/static/toggle.js"></script>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

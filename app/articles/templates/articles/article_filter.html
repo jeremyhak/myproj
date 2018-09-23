@@ -1,0 +1,30 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+<div class="new-post">
+<li><a href="{% url 'articles:create' %}"class="highlight">+</a></li>
+</div>
+    <div class="filter-article">
+
+    <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit" name="filter">Filter</button>
+  </form>
+  <ul>
+  </div>
+  <div class="articles">
+      {% for article in filter.qs %}
+          <div class="article">
+              <h2><a href="{{ article.get_absolute_url}}">{{article.title}}</a></h2>
+              <h10>{{article.snippet}}</h10>
+              <h11>{{article.date}}</h11>
+              <br>
+              <h12>${{article.worth}}</h12>
+
+              <h15 class="author">added by<a href="{% url 'accounts:view_profile_with_pk' pk=article.author.pk%}">{{article.author.username}}</a></h15>
+
+              <h16><a href="{{ article.get_absolute_url}}">see details</a></h16>
+          </div>
+        {% endfor %}
+     </div>
+{% endblock%}

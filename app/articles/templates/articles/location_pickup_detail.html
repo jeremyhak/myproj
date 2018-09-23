@@ -1,0 +1,16 @@
+<!DOCTYPE>
+
+{% load i18n %}
+
+{% block content%}
+
+<div class="pickup-detail">
+
+    <h1>PicpUp Details</h1>
+
+    <h22>{{ pick.pickup }}</h22>
+    <li><a href="https://maps.google.com/?q={{ pick.pickup }}">test</a></li>
+    {{ pick.media }}
+    {{ pick.as_p }}
+</div>
+{% endblock %}

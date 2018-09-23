@@ -1,0 +1,27 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+
+    <h1>POSTS</h1>
+    <div class="search-bar">
+        <form  method='GET' action="">
+            <input type="text" name="q" placeholder="Search for details" value="{{ request.GET.q}}"/>
+            <input type="submit"  value="Search">
+        </form>
+    </div>
+    <div class="new-post">
+    <li><a href="{% url 'articles:create' %}"class="highlight">+</a></li>
+    </div>
+    <div class="articles">
+        {% for article in articles %}
+            <div class="article">
+                <h2><a href="{{ article.get_absolute_url}}">{{article.title}}</a></h2>
+                <h10>{{article.snippet}}</h10>
+                <h11>{{article.date}}</h11>
+                <br>
+                <h12>${{article.worth}}</h12>
+                <h15 class="author">added by {{article.author.username}}</h15>
+                <h16><a href="{{ article.get_absolute_url}}">see details</a></h16>
+            </div>
+        {% endfor %}
+{% endblock%}

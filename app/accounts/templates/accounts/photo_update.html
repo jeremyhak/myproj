@@ -1,0 +1,28 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+<h1>Update Your Profile photo </h1>
+<br>
+<br>
+
+<div class="profile_update">
+    <div class="profile_pic">
+        <img src="{{ user.user.image.url }}" width="20%">
+            <div class="change_photo">
+            <div class="text"
+            <li><a href="{% url 'accounts:photo_update' %}">Update photo</a></li>
+    </div>
+            </div>
+            </div>
+
+<form action="." method="POST" class="padding" enctype="multipart/form-data">
+{% csrf_token %} {{ noodle_form.as_p }}
+<div class="divider"></div>
+{{ formset.management_form }}
+{{ formset.as_p }}
+<br>
+<button type="submit" class="btn-floating btn-large waves-light waves-effect">Done</button>
+history
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base_layout.html'%}
+
+{%block content%}
+<title>Profile</title>
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+</div>
+{%endblock%}

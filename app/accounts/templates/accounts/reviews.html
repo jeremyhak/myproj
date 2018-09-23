@@ -1,0 +1,17 @@
+{% extends 'base_layout.html'%}
+
+{% block content %}
+
+
+    <div class="new-post">
+    <li><a href="{% url 'accounts:create-review' %}"class="highlight">+</a></li>
+    </div>
+    <div class="reviews">
+        {% for review in reviews %}
+            <div class="review">
+                <h20>{{review.text}}</h20>
+
+                <h15 class="author">added by {{review.author.username}}</h15>
+            </div>
+        {% endfor %}
+{% endblock%}

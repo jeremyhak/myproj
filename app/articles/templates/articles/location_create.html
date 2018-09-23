@@ -1,0 +1,21 @@
+<!DOCTYPE>
+{% load i18n %}
+
+{% block content%}
+<h1>PICK</h1>
+<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+<form method="POST" action="{% url "articles:create" %}">{% csrf_token %}
+    {{ wizard.management_form }}
+
+
+    {{ wizard.form.media }}
+    {{ wizard.form.as_p }}
+    {% if wizard.steps.prev %}
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "< Back" %}</button>
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+    {% endif %}
+    <input type="submit" value="{% trans "Submit" %}"/>
+</form>
+{% endblock %}

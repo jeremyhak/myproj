@@ -1,0 +1,48 @@
+{% extends 'base_layout.html'%}
+
+{% load static from staticfiles %}
+
+{%block content%}
+
+
+
+<div class="profile">
+
+    <div class="profile_pic">
+        <img src="{{ user.user.image.url }}" width="20%">
+            <div class="change_photo">
+            <div class="text"
+            <li><a href="{% url 'accounts:photo_update' %}">Update photo</a></li>
+    </div>
+            </div>
+            </div>
+
+        <link rel="stylesheet" href="/css/master.css">
+
+        <div class="info">
+        <p>{{ user.first_name }} {{ user.last_name }}</p>
+        </div>
+        <br>
+        <br>
+    <header>
+        {% load ratings %}
+                <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+                <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
+
+        {% ratings user %}
+        <br>
+        <br>
+        <br>
+        <li><a href=> See Reviews</a></li>
+        <div class="bio">
+            <br>
+            <h2>Bio</h2>
+            <br>
+            <p>Username   : {{ user }}</p>
+            <p>Lives in  : {{ user.user.city }},{{ user.user.country }}</p>
+            <li><a href="{% url 'accounts:account_update' %}"> + add to your bio</a></li>
+        </div>
+    </header>
+</div>
+{%endblock%}
